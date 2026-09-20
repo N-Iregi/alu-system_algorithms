@@ -39,6 +39,7 @@ static void link_edge(vertex_t *from, edge_t *edge, vertex_t *to) {
       tail = tail->next;
     tail->next = edge;
   }
+
   from->nb_edges++;
 }
 
