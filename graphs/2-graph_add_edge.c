@@ -9,14 +9,15 @@
  *
  * Return: Pointer to the vertex, or NULL if not found
  */
-static vertex_t *find_vertex(const graph_t *graph, const char *str) {
-  vertex_t *cur;
+static vertex_t *find_vertex(const graph_t *graph, const char *str)
+{
+	vertex_t *cur;
 
-  for (cur = graph->vertices; cur; cur = cur->next)
-    if (strcmp(cur->content, str) == 0)
-      return (cur);
+	for (cur = graph->vertices; cur; cur = cur->next)
+		if (strcmp(cur->content, str) == 0)
+			return (cur);
 
-  return (NULL);
+	return (NULL);
 }
 
 /**
@@ -25,22 +26,26 @@ static vertex_t *find_vertex(const graph_t *graph, const char *str) {
  * @edge: Preallocated edge
  * @to: Vertex the edge points to
  */
-static void link_edge(vertex_t *from, edge_t *edge, vertex_t *to) {
-  edge_t *tail;
+static void link_edge(vertex_t *from, edge_t *edge, vertex_t *to)
+{
+	edge_t *tail;
 
-  edge->dest = to;
-  edge->next = NULL;
+	edge->dest = to;
+	edge->next = NULL;
 
-  if (!from->edges) {
-    from->edges = edge;
-  } else {
-    tail = from->edges;
-    while (tail->next)
-      tail = tail->next;
-    tail->next = edge;
-  }
+	if (!from->edges)
+	{
+		from->edges = edge;
+	}
+	else
+	{
+		tail = from->edges;
+		while (tail->next)
+			tail = tail->next;
+		tail->next = edge;
+	}
 
-  from->nb_edges++;
+	from->nb_edges++;
 }
 
 /**
@@ -53,33 +58,36 @@ static void link_edge(vertex_t *from, edge_t *edge, vertex_t *to) {
  * Return: 1 on success, 0 on failure (nothing is created on failure)
  */
 int graph_add_edge(graph_t *graph, const char *src, const char *dest,
-                   edge_type_t type) {
-  vertex_t *from, *to;
-  edge_t *forward, *backward = NULL;
+                   edge_type_t type)
+{
+	vertex_t *from, *to;
+	edge_t *forward, *backward = NULL;
 
-  if (!graph || !src || !dest)
-    return (0);
+	if (!graph || !src || !dest)
+		return (0);
 
-  from = find_vertex(graph, src);
-  to = find_vertex(graph, dest);
-  if (!from || !to)
-    return (0);
+	from = find_vertex(graph, src);
+	to = find_vertex(graph, dest);
+	if (!from || !to)
+		return (0);
 
-  forward = malloc(sizeof(edge_t));
-  if (!forward)
-    return (0);
+	forward = malloc(sizeof(edge_t));
+	if (!forward)
+		return (0);
 
-  if (type == BIDIRECTIONAL) {
-    backward = malloc(sizeof(edge_t));
-    if (!backward) {
-      free(forward);
-      return (0);
-    }
-  }
+	if (type == BIDIRECTIONAL)
+	{
+		backward = malloc(sizeof(edge_t));
+		if (!backward)
+		{
+			free(forward);
+			return (0);
+		}
+	}
 
-  link_edge(from, forward, to);
-  if (backward)
-    link_edge(to, backward, from);
+	link_edge(from, forward, to);
+	if (backward)
+		link_edge(to, backward, from);
 
-  return (1);
+	return (1);
 }
