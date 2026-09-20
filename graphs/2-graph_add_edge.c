@@ -58,7 +58,7 @@ static void link_edge(vertex_t *from, edge_t *edge, vertex_t *to)
  * Return: 1 on success, 0 on failure (nothing is created on failure)
  */
 int graph_add_edge(graph_t *graph, const char *src, const char *dest,
-                   edge_type_t type)
+		edge_type_t type)
 {
 	vertex_t *from, *to;
 	edge_t *forward, *backward = NULL;
