@@ -9,8 +9,7 @@
  *
  * Return: The biggest vertex depth, or 0 on failure
  */
-size_t breadth_first_traverse(const graph_t *graph, 
-		void (*action)(const vertex_t *v, size_t depth))
+size_t breadth_first_traverse(const graph_t *graph, void (*action)(const vertex_t *v, size_t depth))
 {
 	const vertex_t **queue, *vertex;
 	size_t *depths, head = 0, tail = 0, max = 0, depth;

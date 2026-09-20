@@ -9,9 +9,7 @@
  * @max: Pointer to the biggest depth seen so far
  * @action: Function called on each visited vertex
  */
-static void dfs_visit(const vertex_t *vertex, char *visited, size_t depth, 
-		size_t *max, 
-		void (*action)(const vertex_t *v, size_t depth))
+static void dfs_visit(const vertex_t *vertex, char *visited, size_t depth, size_t *max, void (*action)(const vertex_t *v, size_t depth))
 {
 	edge_t *edge;
 
